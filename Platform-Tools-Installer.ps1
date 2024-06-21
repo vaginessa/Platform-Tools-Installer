@@ -1,5 +1,5 @@
 if ($Host.Version.Major -lt 5) {
-	Write-Host -Object 'PowerShell 5 or higher is required.' -ForegroundColor 'Red'
+	Write-Host -Object 'PowerShell 5 oder höher!!!' -ForegroundColor 'Red'
 	Start-Sleep -Seconds 2
 	Exit
 }
@@ -9,7 +9,7 @@ $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName 'System.Windows.Forms'
 $folderDialog = New-Object -TypeName 'System.Windows.Forms.FolderBrowserDialog'
 
-Write-Verbose -Message 'Downloading Platform Tools...' -Verbose
+Write-Verbose -Message 'Lade Platform Tools runter...' -Verbose
 $Parameters = @{
 	Uri             = 'https://dl.google.com/android/repository/platform-tools-latest-windows.zip'
 	OutFile         = "$env:Temp\platform-tools.zip"
@@ -18,11 +18,11 @@ $Parameters = @{
 Invoke-WebRequest @Parameters
 
 Write-Host
-Write-Host -Object 'Please choose a folder to install Platform Tools'
+Write-Host -Object 'Ordner für die Installation wählen..'
 
 if ($folderDialog.ShowDialog() -eq 'OK') {
 	Write-Host
-	Write-Verbose -Message 'Unpacking Platform Tools...' -Verbose
+	Write-Verbose -Message 'Platform Tools werden ausgepackt...' -Verbose
 	$Parameters = @{
 		Path        = "$env:Temp\platform-tools.zip"
 		Destination = $folderDialog.SelectedPath
@@ -38,11 +38,11 @@ if ($folderDialog.ShowDialog() -eq 'OK') {
 	Remove-Item -Path $Parameters.Path -Force
 	
 	Write-Host
-	Write-Host -Object 'Platform Tools has been successfully installed!' -ForegroundColor 'Green'
+	Write-Host -Object 'Platform Tools wurden ohne Fehler installiert!' -ForegroundColor 'Green'
 	Start-Sleep -Seconds 2
 }
 else {
 	Write-Host
-	Write-Host -Object 'Folder has not been selected!' -ForegroundColor 'Red'
+	Write-Host -Object 'Ordner nicht gewählt!!' -ForegroundColor 'Red'
 	Start-Sleep -Seconds 2
 }
